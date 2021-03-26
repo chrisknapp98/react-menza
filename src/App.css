@@ -39,7 +39,7 @@
   flex-direction: row;
   */
 }
-
+/* 
 ul,li { 
   list-style-type: none;
   list-style-position:inside;
@@ -47,7 +47,7 @@ ul,li {
   padding:0; 
   width: 100%;
 }
-
+ */
 .without-padding input {
   padding: 10px 0px 10px 10px;
 }

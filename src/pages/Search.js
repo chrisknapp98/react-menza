@@ -195,7 +195,7 @@ function Search(props) {
           })
           .then(response => {
             setMensaList(response);
-            return response;
+            //return response;
           })
           .catch(err => {console.log("failed")})
           break;

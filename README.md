@@ -1,60 +1,23 @@
-# TODO
+# Menza 
+
+Dieses Projekt wurde im Rahmen der Lehrveranstaltung Programmierung mobiler Anwendungen bei Alexander Barge und Matthias Koslowski bearbeitet.
+Wir sind Gruppe 06 bestehend aus:
+- Anne Schatz
+- Patrick Pister
+- Christopher Knapp
+
+Es wurde mit den Frameworks React.js, Material-UI gearbeitet.
 
 ## Bugs
 
 - Manche Speisen haben, obwohl es die gleiche Speise ist, unterschiedliche IDs
-- ~~EntfernungsIcon wird beim zweiten mal laden angezeigt bzw nicht angezeig~~ schneint gefixed zu sein
 - BottomNavigation ist manchmal breiter als es sein sollte (Home und Einstellungen kleiner als die anderen Tabs [bei iPhone 6/7/8])
-- SpeiseCard füllt teilweise nicht 100% des Bereichs aus
-
-## Design überarbeiten
-
-- Logo überarbeiten? 
-
-## Service Worker 
-
-- ~~Caching Strategien für Offline Funktionalität, was eigentlich sinnlos ist~~
-- ~~Bei App.js ne MUI Snackbar über der BottomNavigation anheften, wenn keine Verbindung zum Internet besteht~~
-- Implementierung des Benachrichtigungsservice -->
-
-## Benachrichtigungen
-
-- Benachrichtigungen ~~ausgewählter~~ aller Speisen für MyMensa (+ Favourite Mensen) hinzufügen
-  - jeden Tag pullen...? 
-- ~~Page erstellen Verlinkung über Einstellungen -> Lieblingsspeisen -> Speise~~
-  Actually keine eigene Page dafür. Wir machen einfach eine Selection für Lieblingsspeisen-Benachrichtigung On/Off, die für alle gilt
-- Datenbankeintrag um Benachrichtigungseinstellungen zu speichern...?
 
 
-## Getter und Setter für Datenbankeinträge
 
-- vielleicht noch letzte 10 Mensen für SearchPage
+
   
 
-
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
-
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
-
-<script>
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  var firebaseConfig = {
-    apiKey: "AIzaSyAMplnJJrND-lej_kfNqxjl8P--Kzout4I",
-    authDomain: "menza-d5177.firebaseapp.com",
-    projectId: "menza-d5177",
-    storageBucket: "menza-d5177.appspot.com",
-    messagingSenderId: "239329027194",
-    appId: "1:239329027194:web:45604edd3803e20e8fc7c3",
-    measurementId: "G-4MG48GZT1L"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
-</script>
 
 
 

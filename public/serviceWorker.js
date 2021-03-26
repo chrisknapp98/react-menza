@@ -9,7 +9,6 @@ const CURRENT_CACHE = `main-${CACHE_VERSION}`;
 const cacheFiles = ['/', '/home/', '/mensa/', '/search/', 'favourites', '/settings/', '/settings/mymensa/', 'settings/myspeisen/'];
 
 // on activation we clean up the previously registered service workers
-/* eslint-disable-next-line no-restricted-globals */
 self.addEventListener('activate', evt =>
   evt.waitUntil(
     caches.keys().then(cacheNames => {
@@ -25,7 +24,6 @@ self.addEventListener('activate', evt =>
 );
 
 // on install we download the routes we want to cache for offline
-/* eslint-disable-next-line no-restricted-globals */
 self.addEventListener('install', evt =>
   evt.waitUntil(
     caches.open(CURRENT_CACHE).then(cache => {
@@ -65,7 +63,6 @@ const update = request =>
 
 // general strategy when making a request (eg if online try to fetch it
 // from the network with a timeout, if something fails serve from cache)
-/* eslint-disable-next-line no-restricted-globals */
 self.addEventListener('fetch', evt => {
   evt.respondWith(
     fromNetwork(evt.request, 10000).catch(() => fromCache(evt.request))
@@ -76,9 +73,34 @@ self.addEventListener('fetch', evt => {
 
 // ------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------
-// ------------------------------------------------------------------------------
 // --------------------------- Benachrichtigungen -------------------------------
+// ------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+/**
+ * Unser Plan war usrpruenglich jeden Tag um 11 Ur morgens eine Benachrichtigung
+ * rauszuschicken, falls eine der gespeicherten Lieblingsspeisen in 'Meiner Mensa'
+ * verfuegbar ist.
+ * Zunaechst war die Ueberlegung einfach mit setInterval zu arbeiten, was aber keine 
+ * allzu gute Idee ist. Fuer kurze Intervalle hat das auch funktioniert aber fuer 
+ * laengere duerfte es Probleme geben. 
+ * Und dazu kam noch wie beachten wir die Nutzereinstellungen bezueglich 
+ * Benachrichtigungen. Man hat ja im ServiceWorker keinen Zugriif auf localStorage.
+ * Also muesste man einen EventListener fuer 'message' machen...?
+ * periodicSync haben wir auch erfolglos ausprobiert.
+ * 
+ * Die beste Loesung waere wohl bspw. einen Firebase Server aufzusetzen und deren 
+ * Notification zu abonnieren. Dann gibt es jedoch das Problem: 
+ * Woher weiss der Firebase Server welches 'Meine Mensa' und was 'Meine Lieblingsspeisen' 
+ * sind. Dann muesste man jedes mal den Notificstion service mit den neuen Einstellungen
+ * abonnieren. Also dann warum nicht gleich deren Datenbank nutzen...
+ * Firebase haette wohl wirklich den Rahmen gesprengt.
+ * 
+ * Die Methoden die hier auskommentiert sind, sind lediglich die die auch in der Datei
+ * 'notifications' stehen. Eben nur umgeschrieben, sodass keine imports notwendig sind.
+ * Das ist also die setInterval Methode
+ */
 
+/* 
 function displayNotification(message) {
   if (Notification.permission == 'granted') {
     self.registration.showNotification(message);
@@ -113,7 +135,6 @@ function getMyMensa() {
       }
     };
   })
-  
 }
 
 function getFavSpeisen() {
@@ -156,6 +177,7 @@ function fetchSpeisenFromAPI(mensaID, date) {
   })
   .catch(err => console.log(err));
 }
+
 
 function notifyTodaysMeals() {
   getMyMensa().then(mensa => {
@@ -209,22 +231,18 @@ function notifyTodaysMeals() {
     })
   })
 }
-
-/* 
-// Benachrichtigungen - Periodic fetch der SpeisenListe
-// Lassen wir doch sein
-self.addEventListener('periodicsync', event => {
-  if (event.tag == 'get-todays-meals') {
-    event.waitUntil(notifications.fetchAndCacheTodaysMeals());
-  }
-});
  */
 
 
+
+
+
+/* 
+// Always notify at 11 am every day
 var dateNow = new Date();
 var notiDate = new Date();
 if (dateNow.getHours() >= 11) {
-  // Nach 11 Uhr - Morgen mit Benachrichtigungen beginnen bzw. mit dem Check
+  // It's later than 11 am - Start tomorrow notifying
   notiDate.setDate(notiDate.getDate() + 1); 
 }
 notiDate.setHours(11);
@@ -232,8 +250,9 @@ var timeTillNoti = notiDate - dateNow;
 var dayInMS = 24 * 60 * 60 * 1000;
 setTimeout(() => {
   setInterval(() => {
-    /* if (localStorage['notifications'] === "true") {
+    if (localStorage['notifications'] === "true") {
       notifyTodaysMeals()
-    } */
+    }
   }, dayInMS);
 }, notiDate);
+ */

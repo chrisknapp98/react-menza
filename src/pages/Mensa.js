@@ -203,7 +203,7 @@ function Mensa(props) {
                     inputVariant="outlined"
                     value={selectedDate}
                     cancelLabel="Abbrechen"
-                    showTodayButton="true"
+                    showTodayButton={true}
                     todayLabel="heute"
                     onChange={handleDateChange}
                     KeyboardButtonProps={{

@@ -127,5 +127,5 @@ export function notifyTodaysMeals() {
         displayNotification(notiText);
       }
     })
-  })
+  }).catch(err => {console.log(err)})
 }

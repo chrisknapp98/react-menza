@@ -15,6 +15,9 @@ import { ThemeProvider } from '@material-ui/styles';
 import * as Preferences from '../database/Preferences';
 
 const useStyles = makeStyles({
+  paperDiv: {
+    width: "100%",
+  },
   root: {
     margin: "10px 0px",
     width: "100%",
@@ -123,7 +126,7 @@ function SpeisePaper(props) {
     })
   }
   return (
-    <div>
+    <div className={classes.paperDiv}>
       <Paper className={classes.root}>
         <div className={classes.paperContent}>
         

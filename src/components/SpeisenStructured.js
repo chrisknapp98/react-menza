@@ -7,6 +7,8 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 
 import SpeisePaper from './SpeisePaper';
 
@@ -18,11 +20,16 @@ const useStyles = makeStyles({
     flexBasis: "100%",
   },
   paperList: {
+    width: "100%",
     listStyleType: "none",
     paddingLeft: 0,
   },
   list: {
-    width: "100%"
+    width: "100%",
+  },
+  listItem: {
+    padding: 0,
+    width: "100%",
   },
 });
 
@@ -39,16 +46,16 @@ function AccordionAndSpeisen(props) {
         </AccordionSummary>
         <AccordionDetails>
         <div className={classes.paperList}>
-        <ul className={classes.list}>
+        <List className={classes.list}>
           {props.list.map(item => (
             <div className={classes.speisePaper}>
-            <li className={classes.list}>
+            <ListItem className={classes.listItem}>
             <SpeisePaper speise={item} />
-            </li>
+            </ListItem>
             </div>
           ))}
 
-        </ul>
+        </List>
         </div>
         </AccordionDetails>
       </Accordion>

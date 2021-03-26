@@ -55,7 +55,6 @@ export async function getFromDatabase(database, value, index) {
     valueAsCoordsArr.push(Number(tempArr[0]));
     valueAsCoordsArr.push(Number(tempArr[1]));
   }
-  console.log(valueAsCoordsArr);
   if (!index || index == "id") {
     //dbPromise.then(function(db) {
     return idb.openDB(database).then(function(db) {
@@ -97,7 +96,6 @@ export async function getFromDatabase(database, value, index) {
           } 
           break;
         case "coordinates":
-          console.log(cursor.value);
           if (cursor.value.coordinates !== null) {
           if (distance(valueAsCoordsArr[0], valueAsCoordsArr[1], cursor.value.coordinates[0], cursor.value.coordinates[1]) <= 20) {
             objList.push(cursor.value);
@@ -117,13 +115,14 @@ export async function getFromDatabase(database, value, index) {
 }
 
 // ----------------------------------------------------------
-// I believe all of the functions below are not functional or not used but I'm afraid to comment/delete them the day before the final presentation
+// I believe all of the functions below are not functional or 
+// not used but I'm afraid to comment/delete them the day before 
+// the final presentation^^
 
 export async function getFromDatabaseExact(database, value, index) {
   var dbPromise = idb.openDB(database);
   dbPromise.then(async function(db) {
     const retValue = await db.getFromIndex(database, index, value);
-    console.log(retValue);
     return retValue;
   })
 }
