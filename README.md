@@ -1,3 +1,39 @@
+# Menza 
+
+Dieses Projekt wurde im Rahmen der Lehrveranstaltung Programmierung mobiler Anwendungen bei Alexander Barge und Matthias Koslowski bearbeitet.
+Wir sind Gruppe 06 bestehend aus:
+- Anne Schatz
+- Patrick Pister
+- Christopher Knapp
+
+Es wurde mit den Frameworks React.js, Material-UI gearbeitet.
+
+## Bugs
+
+- Manche Speisen haben, obwohl es die gleiche Speise ist, unterschiedliche IDs
+- BottomNavigation ist manchmal breiter als es sein sollte (Home und Einstellungen kleiner als die anderen Tabs [bei iPhone 6/7/8])
+
+
+
+
+  
+
+
+
+
+
+
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+
+# Stock Text
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Running on Repl.it
