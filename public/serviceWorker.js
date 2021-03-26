@@ -6,7 +6,7 @@ const CACHE_VERSION = 10;
 const CURRENT_CACHE = `main-${CACHE_VERSION}`;
 
 // these are the routes we are going to cache for offline support
-const cacheFiles = ['/', '/home/', '/mensa/', '/search/', 'favourites', '/settings/', '/settings/mymensa/', 'settings/myspeisen/'];
+const cacheFiles = ['/', '/home/', '/mensa/', '/search/', '/favourites/', '/settings/', '/settings/mymensa/', '/settings/myspeisen/'];
 
 // on activation we clean up the previously registered service workers
 self.addEventListener('activate', evt =>
@@ -28,7 +28,7 @@ self.addEventListener('install', evt =>
   evt.waitUntil(
     caches.open(CURRENT_CACHE).then(cache => {
       return cache.addAll(cacheFiles);
-    })
+    }).catch(err => {console.log(err)})
   )
 );
 
@@ -40,7 +40,7 @@ const fromNetwork = (request, timeout) =>
       clearTimeout(timeoutId);
       fulfill(response);
       update(request);
-    }, reject);
+    }, reject).catch(err => {console.log(err)});
   });
 
 // fetch the resource from the browser cache
@@ -51,7 +51,7 @@ const fromCache = request =>
       cache
         .match(request)
         .then(matching => matching)// || cache.match('/offline/'))
-    );
+    ).catch(err => {console.log(err)});
 
 // cache the current page to make it available for offline
 const update = request =>
@@ -59,7 +59,7 @@ const update = request =>
     .open(CURRENT_CACHE)
     .then(cache =>
       fetch(request).then(response => cache.put(request, response))
-    );
+    ).catch(err => {console.log(err)});
 
 // general strategy when making a request (eg if online try to fetch it
 // from the network with a timeout, if something fails serve from cache)
@@ -77,25 +77,7 @@ self.addEventListener('fetch', evt => {
 // ------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------
 /**
- * Unser Plan war usrpruenglich jeden Tag um 11 Ur morgens eine Benachrichtigung
- * rauszuschicken, falls eine der gespeicherten Lieblingsspeisen in 'Meiner Mensa'
- * verfuegbar ist.
- * Zunaechst war die Ueberlegung einfach mit setInterval zu arbeiten, was aber keine 
- * allzu gute Idee ist. Fuer kurze Intervalle hat das auch funktioniert aber fuer 
- * laengere duerfte es Probleme geben. 
- * Und dazu kam noch wie beachten wir die Nutzereinstellungen bezueglich 
- * Benachrichtigungen. Man hat ja im ServiceWorker keinen Zugriif auf localStorage.
- * Also muesste man einen EventListener fuer 'message' machen...?
- * periodicSync haben wir auch erfolglos ausprobiert.
- * 
- * Die beste Loesung waere wohl bspw. einen Firebase Server aufzusetzen und deren 
- * Notification zu abonnieren. Dann gibt es jedoch das Problem: 
- * Woher weiss der Firebase Server welches 'Meine Mensa' und was 'Meine Lieblingsspeisen' 
- * sind. Dann muesste man jedes mal den Notificstion service mit den neuen Einstellungen
- * abonnieren. Also dann warum nicht gleich deren Datenbank nutzen...
- * Firebase haette wohl wirklich den Rahmen gesprengt.
- * 
- * Die Methoden die hier auskommentiert sind, sind lediglich die die auch in der Datei
+ * Die Methoden die hier auskommentiert sind, sind lediglich die, die auch in der Datei
  * 'notifications' stehen. Eben nur umgeschrieben, sodass keine imports notwendig sind.
  * Das ist also die setInterval Methode
  */

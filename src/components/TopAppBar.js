@@ -149,7 +149,6 @@ function TopAppBar(props) {
       })
     })
     .then(response => {
-      console.log(response)
       //setMensa(response);
       return response;
     })
@@ -180,14 +179,11 @@ function TopAppBar(props) {
       return [tempMensa, mensaList];
     }) 
     .then(list => {
-      console.log(list);
       var tempMensa = list[0];
       var mensaList = list[1];
       var foundInList = false;
       if (mensaList.length !== 0) {
       for (var obj of mensaList) {
-        console.log(obj);
-        console.log(mensa)
         if (obj.id === tempMensa.id) {
           foundInList = true;
           break;
@@ -211,7 +207,6 @@ function TopAppBar(props) {
   }
 
   const handleFavouriteButton = async () => {
-    console.log("button pressed");
  
     checkIfInFavMensen().then(list => {
       var tempMensa = list[0];
@@ -219,7 +214,6 @@ function TopAppBar(props) {
       console.log(bool);
       
       if (bool) {
-        console.log(tempMensa);
         Preferences.removeMensaFromFavs(tempMensa);
       } else {
         Preferences.addMensaToFavs(tempMensa);
@@ -233,13 +227,10 @@ function TopAppBar(props) {
   React.useEffect(() => {
     const checkFavButton = async () => {
     if (props.fav) {
-      console.log("running");
     checkIfInFavMensen()
     .then(list => {
       var tempMensa = list[0];
       var bool = list[1];
-      console.log(tempMensa);
-      console.log(bool);
       if (bool) {
         setFavButton(true);
       }

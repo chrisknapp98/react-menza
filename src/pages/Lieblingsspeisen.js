@@ -24,7 +24,6 @@ function Lieblingsspeisen() {
   React.useEffect(() => {
     Preferences.getFavSpeisen()
     .then(list => {
-      console.log(list);
       setSpeisenList(list);
     })
   }, [])
@@ -34,7 +33,7 @@ function Lieblingsspeisen() {
     <div className={classes.pageContent}>
     {(speisenList.length >= 1) ? <SpeisenStructured list={speisenList} /> 
         :
-        <Typography variant="body2" >
+        <Typography variant="body1" >
         Keine Speisen verfügbar
         </Typography>
         }

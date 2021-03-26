@@ -2,6 +2,7 @@ import React from 'react';
 
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Chip from '@material-ui/core/Chip';
@@ -40,6 +41,7 @@ const useStyles = makeStyles({
   },
   prices: {
     display: "flex",
+    //flexDirection: 'row',
     width: "100%",
   },
   pricesLeft: {
@@ -59,7 +61,13 @@ const useStyles = makeStyles({
   },
   listItem: {
     padding: 0,
-  }
+  },
+  flexContainer: {
+    width: "100%",
+    display: 'flex',
+    flexDirection: 'row',
+    padding: 0,
+  },
 });
 
 const heartColor = "#70d47c";
@@ -148,7 +156,7 @@ function SpeisePaper(props) {
         <Tags list={props.speise.notes} className={classes.tag} />
         </div>
         <div className={classes.prices}>
-        
+        <List className={classes.flexContainer}>
           {Object.keys(props.speise.prices).map((role, index) => {
             var firString = (role === "students") ? "Studenten" : 
                             (role === "employees") ? "Mitarbeiter" :
@@ -161,7 +169,7 @@ function SpeisePaper(props) {
               <ListItemText primary={firString} secondary={secString}/>
             </ListItem>  
           )})}
-          
+          </List>
         </div>
         
         </div>
