@@ -2,11 +2,30 @@
 
 Dieses Projekt wurde im Rahmen der Lehrveranstaltung Programmierung mobiler Anwendungen bei Alexander Barge und Matthias Koslowski bearbeitet.
 Wir sind Gruppe 06 bestehend aus:
+
 - Anne Schatz
 - Patrick Pister
 - Christopher Knapp
 
 Es wurde mit den Frameworks React.js, Material-UI gearbeitet.
+Alle Daten über Mensa und Speisen werden von der OpenMensa API gezogen.
+Beim ersten Start werden jedoch alle Mensen der API in dem ObjectStore bzw. der Tabelle `mensaDB` in indexedDB gepeichert und diese wird dann für alle weiteren Aktivitäten im Bezug auf Mensen verwendet.
+Benutzereinstellungen wie 'Meine Mensa', 'Lieblingsmensen' und 'Lieblingsspeisen' werden im ObjectStore `userPreferences` in ihren jeweiligen Tabellen gespeichert.
+
+
+## Benachrichtigungen
+Benachrichtigungen sind leider nicht ganz funktional.
+Unser Plan war ursprünglich jeden Tag um 11 Uhr morgens eine Benachrichtigung rauszuschicken, falls eine der gespeicherten Lieblingsspeisen in 'Meiner Mensa' verfügbar ist.
+Zunächst war die Ueberlegung einfach mit setInterval zu arbeiten, was aber keine allzu gute Idee ist. Für kurze Intervalle hat das auch funktioniert aber für längere dürfte es Probleme geben, da der ServiceWorker ja nicht ewig am laufen gehalten werden kann. 
+Und dazu kam noch wie beachten wir die Nutzereinstellungen bezüglich Benachrichtigungen. Man hat ja im ServiceWorker keinen Zugriif auf localStorage.
+Also müsste man einen EventListener für 'message' machen und basierend darauf Benachrichtigungen aktivieren/deaktivieren? 
+periodicSync haben wir auch erfolglos ausprobiert. Hatten jedoch dann mit mehr Aufwand dasselbe Problem mit den Einstellungen.
+
+Die beste Loesung wäre wohl bspw. einen Firebase Server aufzusetzen und deren Notifications zu abonnieren. Dann gibt es jedoch das Problem: 
+Woher weiss der Firebase Server welches 'Meine Mensa' und was 'Meine Lieblingsspeisen' sind. 
+Dann müsste man jedes mal den Notification service mit den neuen Einstellungen abonnieren. Also dann warum nicht gleich deren Datenbank nutzen...
+Firebase hätte wohl wirklich den Rahmen gesprengt.
+
 
 ## Bugs
 
@@ -14,16 +33,8 @@ Es wurde mit den Frameworks React.js, Material-UI gearbeitet.
 - BottomNavigation ist manchmal breiter als es sein sollte (Home und Einstellungen kleiner als die anderen Tabs [bei iPhone 6/7/8])
 
 
-
-
   
 
-
-
-
-
-
-
 &nbsp;
 &nbsp;
 &nbsp;
@@ -32,7 +43,7 @@ Es wurde mit den Frameworks React.js, Material-UI gearbeitet.
 &nbsp;
 
 
-# Stock Text
+# Repl.it Text
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

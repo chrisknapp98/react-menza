@@ -8,7 +8,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 //serviceWorker.unregister();
 //serviceWorker.register();
-/* 
+
 console.log("Trying to register service worker");
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
@@ -20,4 +20,3 @@ if ("serviceWorker" in navigator) {
       console.log("Registration failed with ", error);
     });
 }
- */
