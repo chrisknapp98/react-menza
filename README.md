@@ -1,12 +1,6 @@
 # Menza 
 
-Dieses Projekt wurde im Rahmen der Lehrveranstaltung Programmierung mobiler Anwendungen bei Alexander Barge und Matthias Koslowski bearbeitet.
-Wir sind Gruppe 06 bestehend aus:
-
-- Anne Schatz
-- Patrick Pister
-- Christopher Knapp
-
+Dieses Projekt wurde im Rahmen der Lehrveranstaltung Programmierung mobiler Anwendungen im Wintersemester 20/21 bearbeitet.
 Es wurde mit den Frameworks React.js, Material-UI gearbeitet.
 Alle Daten über Mensa und Speisen werden von der OpenMensa API gezogen.
 Beim ersten Start werden jedoch alle Mensen der API in dem ObjectStore bzw. der Tabelle `mensaDB` in indexedDB gepeichert und diese wird dann für alle weiteren Aktivitäten im Bezug auf Mensen verwendet.
